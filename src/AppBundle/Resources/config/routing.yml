@@ -1,0 +1,6 @@
+vaccines_cget:
+    path: ''    # No hay que añadir nada al prefijo
+    defaults:
+      _controller: AppBundle:Vaccine:vaccines_cget
+    methods:
+      - GET
