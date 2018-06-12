@@ -10,6 +10,15 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Message implements \JsonSerializable
 {
+
+    /**
+     * @var int
+     * @ORM\Column(name="id", type="integer", nullable=false)
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="IDENTITY")
+     */
+    private $id;
+
     private $code;
 
     private $message;
@@ -25,6 +34,13 @@ class Message implements \JsonSerializable
         $this->message = $message;
     }
 
+    /**
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
     /**
      * @return mixed
      */

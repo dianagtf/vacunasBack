@@ -30,16 +30,16 @@ class Vacunas implements \JsonSerializable
     /**
      * @var string
      *
-     * @ORM\Column(name="nombre", type="text", length=65535, nullable=false)
+     * @ORM\Column(name="name", type="text", length=65535, nullable=false)
      */
-    private $nombre;
+    private $name;
 
     /**
      * @var string
      *
-     * @ORM\Column(name="condiciones", type="string", length=50, nullable=false)
+     * @ORM\Column(name="$conditions", type="string", length=50, nullable=false)
      */
-    private $condiciones;
+    private $conditions;
 
     /**
      * @var boolean
@@ -106,8 +106,8 @@ class Vacunas implements \JsonSerializable
 
     /**
      * Vacunas constructor.
-     * @param string $nombre
-     * @param string $condiciones
+     * @param string $name
+     * @param string $conditions
      * @param bool $twoMonths
      * @param bool $fourMonths
      * @param bool $elevenMonths
@@ -118,19 +118,19 @@ class Vacunas implements \JsonSerializable
      * @param bool $twelveYears
      * @param bool $fourteenYears
      */
-    public function __construct(string $nombre, string $condiciones, bool $twoMonths, bool $fourMonths, bool $elevenMonths, bool $twelveMonths, bool $fifteenMonths, bool $fourYears, bool $sixYears, bool $twelveYears, bool $fourteenYears)
+    public function __construct(string $name, string $conditions, bool $twoMonths, bool $fourMonths, bool $elevenMonths, bool $twelveMonths, bool $fifteenMonths, bool $fourYears, bool $sixYears, bool $twelveYears, bool $fourteenYears)
     {
-        $this->nombre = $nombre;
+        $this->name = $name;
+        $this->conditions = $conditions;
         $this->twoMonths = $twoMonths;
         $this->fourMonths = $fourMonths;
         $this->elevenMonths = $elevenMonths;
         $this->twelveMonths = $twelveMonths;
-        $this->$fifteenMonths = $fifteenMonths;
+        $this->fifteenMonths = $fifteenMonths;
         $this->fourYears = $fourYears;
         $this->sixYears = $sixYears;
         $this->twelveYears = $twelveYears;
         $this->fourteenYears = $fourteenYears;
-        $this->condiciones = $condiciones;
     }
 
     /**
@@ -144,40 +144,40 @@ class Vacunas implements \JsonSerializable
     /**
      * @return string
      */
-    public function getNombre(): string
+    public function getName(): string
     {
-        return $this->nombre;
+        return $this->name;
     }
 
     /**
      * @param string $nombre
      */
-    public function setNombre(string $nombre)
+    public function setName(string $name)
     {
-        $this->nombre = $nombre;
+        $this->name = $name;
     }
 
     /**
      * @return string
      */
-    public function getCondiciones(): string
+    public function getConditions(): string
     {
-        return $this->condiciones;
+        return $this->conditions;
     }
 
     /**
      * @param string $condiciones
      */
-    public function setCondiciones(string $condiciones)
+    public function setConditions(string $conditions)
     {
-        $this->condiciones = $condiciones;
+        $this->conditions = $conditions;
     }
 
 
     /**
      * @return bool
      */
-    public function getTwoMonths(): bool
+    public function isTwoMonths(): bool
     {
         return $this->twoMonths;
     }
@@ -193,7 +193,7 @@ class Vacunas implements \JsonSerializable
     /**
      * @return bool
      */
-    public function getFourMonths(): bool
+    public function isFourMonths(): bool
     {
         return $this->twoMonths;
     }
@@ -327,11 +327,21 @@ class Vacunas implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        return [
+        $array = [
             'id' => $this->getId(),
-            'nombre' => $this->getNombre(),
-            'condiciones' => $this->getCondiciones()
+            'name' => $this->getName(),
+            'conditions' => $this->getConditions(),
+            'twoMonths' => $this->isTwoMonths(),
+            'fourMonths' => $this->isFourMonths(),
+            'elevenMonths' => $this->isElevenMonths(),
+            'twelveMonths' => $this->isTwelveMonths(),
+            'fifteenMonths' => $this->isFifteenMonths(),
+            'fourYears' => $this->isFourYears(),
+            'sixYears' => $this->isSixYears(),
+            'twelveYears' => $this->isTwelveYears(),
+            'fourteenYears' => $this->isFourteenYears()
         ];
+        return $array;
     }
 
 }

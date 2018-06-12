@@ -3,10 +3,10 @@
 require __DIR__ . '/../../vendor/autoload.php';
 require_once __DIR__ . '/../../bootstrap.php';
 
-use Vacunas\VacunasBack\Entity\Vacunas;
+use AppBundle\Entity\Vacunas;
 
 // Carga las variables de entorno
-$dotenv = new \Dotenv\Dotenv(__DIR__ . '/vacunasBack');
+$dotenv = new \Dotenv\Dotenv(__DIR__ . '/../../');
 $dotenv->load();
 
 $entityManager = getEntityManager();
