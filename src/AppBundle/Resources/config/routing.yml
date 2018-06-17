@@ -4,3 +4,10 @@ vaccines_cget:
       _controller: AppBundle:Vaccine:vaccines_cget
     methods:
       - GET
+
+userss_cget:
+    path: ''    # No hay que añadir nada al prefijo
+    defaults:
+      _controller: AppBundle:Users:users_cget
+    methods:
+      - GET

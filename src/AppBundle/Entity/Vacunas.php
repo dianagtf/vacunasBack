@@ -37,69 +37,69 @@ class Vacunas implements \JsonSerializable
     /**
      * @var string
      *
-     * @ORM\Column(name="$conditions", type="string", length=50, nullable=false)
+     * @ORM\Column(name="conditions", type="string", length=50, nullable=false)
      */
     private $conditions;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$twoMonths", type="boolean", nullable=false)
+     * @ORM\Column(name="twoMonths", type="boolean", nullable=false)
      */
     private $twoMonths;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$fourMonths", type="boolean", nullable=false)
+     * @ORM\Column(name="fourMonths", type="boolean", nullable=false)
      */
     private $fourMonths;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$elevenMonths", type="boolean", nullable=false)
+     * @ORM\Column(name="elevenMonths", type="boolean", nullable=false)
      */
     private $elevenMonths;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$twelveMonths", type="boolean", nullable=false)
+     * @ORM\Column(name="twelveMonths", type="boolean", nullable=false)
      */
     private $twelveMonths;
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$fifteenMonths", type="boolean", nullable=false)
+     * @ORM\Column(name="fifteenMonths", type="boolean", nullable=false)
      */
     private $fifteenMonths;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$fourYears", type="boolean", nullable=false)
+     * @ORM\Column(name="fourYears", type="boolean", nullable=false)
      */
     private $fourYears;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$sixYears", type="boolean", nullable=false)
+     * @ORM\Column(name="sixYears", type="boolean", nullable=false)
      */
     private $sixYears;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$twelveYears", type="boolean", nullable=false)
+     * @ORM\Column(name="twelveYears", type="boolean", nullable=false)
      */
     private $twelveYears;
 
     /**
      * @var boolean
      *
-     * @ORM\Column(name="$fourteenYears", type="boolean", nullable=false)
+     * @ORM\Column(name="fourteenYears", type="boolean", nullable=false)
      */
     private $fourteenYears;
 
@@ -150,7 +150,7 @@ class Vacunas implements \JsonSerializable
     }
 
     /**
-     * @param string $nombre
+     * @param string $name
      */
     public function setName(string $name)
     {
@@ -166,7 +166,7 @@ class Vacunas implements \JsonSerializable
     }
 
     /**
-     * @param string $condiciones
+     * @param string $conditions
      */
     public function setConditions(string $conditions)
     {
