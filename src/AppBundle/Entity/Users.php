@@ -40,6 +40,13 @@ class Users implements \JsonSerializable
      */
     private $lastName;
 
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="password", type="text", length=65535, nullable=false)
+     */
+    private $password;
+
 
     /**
      * Users constructor.
@@ -47,13 +54,15 @@ class Users implements \JsonSerializable
      * @param string $username
      * @param string $firstName
      * @param string $lastName
+     * @param string $password
      */
-    public function __construct(int $id, string $username, string $firstName, string $lastName)
+    public function __construct(int $id, string $username, string $firstName, string $lastName, string $password)
     {
         $this->id = $id;
         $this->username = $username;
         $this->firstName = $firstName;
         $this->lastName = $lastName;
+        $this->password = $password;
     }
 
     /**
@@ -121,6 +130,22 @@ class Users implements \JsonSerializable
     }
 
     /**
+     * @return string
+     */
+    public function getPassword(): string
+    {
+        return $this->password;
+    }
+
+    /**
+     * @param string $password
+     */
+    public function setPassword(string $password)
+    {
+        $this->password = $password;
+    }
+
+    /**
      * Specify data which should be serialized to JSON
      * @link http://php.net/manual/en/jsonserializable.jsonserialize.php
      * @return mixed data which can be serialized by <b>json_encode</b>,
@@ -133,7 +158,8 @@ class Users implements \JsonSerializable
             'id' => $this->getId(),
             'username' => $this->getUsername(),
             'firstName' => $this->getFirstName(),
-            'lastName' => $this->getLastName()
+            'lastName' => $this->getLastName(),
+            'password' => $this->getPassword()
         ];
         return $array;
     }
