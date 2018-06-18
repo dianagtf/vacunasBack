@@ -11,6 +11,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Users implements \JsonSerializable
 {
+
+    // ...
+    /**
+     * @OneToMany(targetEntity="VacunaUser", mappedBy="id")
+     */
+
     /**
      * @var int
      * @ORM\Column(name="id", type="integer", nullable=false)

@@ -39,7 +39,11 @@
         "symfony/swiftmailer-bundle": "^2.3.10",
         "symfony/symfony": "3.3.*",
         "twig/twig": "^1.0||^2.0",
-        "vlucas/phpdotenv": "^2.4"
+        "vlucas/phpdotenv": "^2.4",
+		
+		"firebase/php-jwt": "dev-master",
+		"zendframework/zend-config": "~2.3",
+		"zendframework/zend-http": "~2.3"
     },
 
   "require-dev": {
