@@ -14,6 +14,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
+use Doctrine\Common\Collections\Criteria;
 
 /**
  * Class APIVacunaEdadController
@@ -71,28 +73,9 @@ class APIVacunaEdadController extends Controller
             );
         }
 
-        if (isset($postData['isVacunated1']) || isset($postData['email'])) {
+        if (isset($postData['isVacunated1'])) {
             /* @var \Doctrine\Common\Collections\Criteria $criteria */
-            $criteria = new Criteria();
-            if (isset($postData['id'], $postData['age'])) {
-                $criteria
-                    ->where($criteria::expr()->eq('id', $postData['id']))
-                    ->orWhere($criteria::expr()->eq('age', $postData['age']));
-            }
 
-            $vacunaedades = $entityManager
-                ->getRepository(VacunaEdad::class)
-                ->matching($criteria);
-
-            if (count($vacunaedades)) {    // 400 - Bad Request
-                return new JsonResponse(
-                    new Message(
-                        Response::HTTP_BAD_REQUEST,
-                        Response::$statusTexts[400]
-                    ),
-                    Response::HTTP_BAD_REQUEST
-                );
-            }
             if (isset($postData['age'])) {
                 $vacunaedad->setIsVacunated1($postData['isVacunated1']);
             }

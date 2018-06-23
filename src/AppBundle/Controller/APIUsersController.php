@@ -76,8 +76,7 @@ class APIUsersController extends Controller
         /* @var \Doctrine\Common\Collections\Criteria $criteria */
         $criteria = new Criteria();
         $criteria
-            ->where($criteria::expr()->eq('username', $postData['username']))
-            ->orWhere($criteria::expr()->eq('firstName', $postData['firstName']));
+            ->where($criteria::expr()->eq('email', $postData['email']));
         $user_exist = $entityManager
             ->getRepository('AppBundle:Users')
             ->matching($criteria);
@@ -86,10 +85,10 @@ class APIUsersController extends Controller
 
             return new JsonResponse(
                 new Message(
-                    Response::HTTP_BAD_REQUEST,
+                    "Email ya utilizado",
                     Response::$statusTexts[400]
                 ),
-                Response::HTTP_BAD_REQUEST
+                "Email ya utilizado"
             );
         }
 
@@ -102,6 +101,7 @@ class APIUsersController extends Controller
             $postData['email'],
             $postData['password'],
             $postData['passwordRepeat'],
+            $postData['numChildren'],
             $postData['childrenBirthday']
         );
         $entityManager->persist($user);
