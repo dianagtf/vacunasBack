@@ -18,3 +18,18 @@ vacunauser_cget:
       _controller: AppBundle:VacunaUser:vacunauser_cget
     methods:
       - GET
+
+vacunaedad_cget:
+    path: ''    # No hay que añadir nada al prefijo
+    defaults:
+      _controller: AppBundle:VacunaEdad:vacunaedad_cget
+    methods:
+      - GET
+
+vacunaedad_cget_ids:
+    path: 'id'    # No hay que añadir nada al prefijo
+    defaults:
+      _controller: AppBundle:VacunaEdad:vacunaedad_cget_ids
+    methods:
+      - GET
+

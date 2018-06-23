@@ -99,7 +99,10 @@ class APIUsersController extends Controller
             $postData['username'],
             $postData['firstName'],
             $postData['lastName'],
-            $postData['password']
+            $postData['email'],
+            $postData['password'],
+            $postData['passwordRepeat'],
+            $postData['childrenBirthday']
         );
         $entityManager->persist($user);
         $entityManager->flush();
@@ -111,21 +114,21 @@ class APIUsersController extends Controller
      * Summary: Provides the list of HTTP supported methods
      * Notes: Return a &#x60;Allow&#x60; header with a list of HTTP supported methods.
      *
-     * @param int $userId User id
+     * @param int $id Users id
      *
      * @return JsonResponse
      *
      * @Route(
-     *     "/{userId}",
+     *     "/{id}",
      *     name = "options_users",
-     *     defaults = {"userId" = 1},
-     *     requirements = {"userId": "\d+"}
+     *     defaults = {"id" = 1},
+     *     requirements = {"id": "\d+"}
      *     )
      * @Method(Request::METHOD_OPTIONS)
      */
-    public function optionsUserAction(int $userId)
+    public function optionsUserAction(int $id)
     {
-        $methods = ($userId)
+        $methods = ($id)
             ? ['GET', 'PUT', 'DELETE']
             : ['GET', 'POST'];
 
@@ -134,5 +137,29 @@ class APIUsersController extends Controller
             Response::HTTP_OK,
             ['Allow' => implode(', ', $methods)]
         );
+    }
+
+    /**
+     * Summary: Returns a user based on a single ID
+     * Notes: Returns the user identified by &#x60;userId&#x60;.
+     *
+     * @param int $id Users id
+     *
+     * @return JsonResponse
+     *
+     * @Route("/{id}", name="cget_users_by_id", requirements={"id": "\d+"})
+     * @Method(Request::METHOD_GET)
+     */
+    public function getUserAction(int $id)
+    {
+        $repo = $this->getDoctrine()->getRepository('AppBundle:Users');
+        $user = $repo->findOneBy(['id' => $id]);
+
+        return empty($user)
+            ? new JsonResponse(
+                new Message(Response::HTTP_NOT_FOUND, Response::$statusTexts[404]),
+                Response::HTTP_NOT_FOUND
+            )
+            : new JsonResponse($user);
     }
 }

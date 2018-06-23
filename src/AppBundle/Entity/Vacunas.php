@@ -327,7 +327,7 @@ class Vacunas implements \JsonSerializable
      */
     public function jsonSerialize()
     {
-        $array = [
+        $array =  [
             'id' => $this->getId(),
             'name' => $this->getName(),
             'conditions' => $this->getConditions(),
