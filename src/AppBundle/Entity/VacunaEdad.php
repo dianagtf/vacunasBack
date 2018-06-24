@@ -28,6 +28,29 @@ class VacunaEdad implements \JsonSerializable
     private $id;
 
     /**
+     * VacunaEdad Users
+     *
+     * @var Users
+     *
+     * @ORM\ManyToOne(targetEntity="Users")
+     * @ORM\JoinColumns({
+     *     @ORM\JoinColumn(
+     *          name                 = "user_id",
+     *          referencedColumnName = "id",
+     *          onDelete             = "cascade"
+     *     )
+     * })
+     */
+    private $user;
+
+    /**
+     * @var string
+     *
+     * @ORM\Column(name="name", type="string")
+     */
+    private $name;
+
+    /**
      * @var string
      *
      * @ORM\Column(name="age", type="string")
@@ -169,6 +192,7 @@ class VacunaEdad implements \JsonSerializable
 
     /**
      * Vacunas constructor.
+     * @param string $name
      * @param string $age
      * @param string $edad
      * @param string $vacuna1
@@ -190,12 +214,13 @@ class VacunaEdad implements \JsonSerializable
      * @param string $dateVacuna5
      * @param string $dateVacuna6
      */
-    public function __construct(string $age, string $edad, string $vacuna1, string $vacuna2, string $vacuna3,
+    public function __construct(string $name, string $age, string $edad, string $vacuna1, string $vacuna2, string $vacuna3,
                                 string $vacuna4, string $vacuna5, string $vacuna6, bool $isVacunated1,
                                 bool $isVacunated2, bool $isVacunated3, bool $isVacunated4, bool $isVacunated5,
                                 bool $isVacunated6, string $dateVacuna1, string $dateVacuna2, string $dateVacuna3,
                                 string $dateVacuna4, string $dateVacuna5, string $dateVacuna6)
     {
+        $this->name = $name;
         $this->age = $age;
         $this->edad = $edad;
         $this->vacuna1 = $vacuna1;
@@ -224,6 +249,38 @@ class VacunaEdad implements \JsonSerializable
     public function getId(): int
     {
         return $this->id;
+    }
+
+    /**
+     * @return Users
+     */
+    public function getUser(): Users
+    {
+        return new Users(1, '', '', '','', '', '', 1, '');
+    }
+
+    /**
+     * @param Users $user
+     */
+    public function setUser(Users $user)
+    {
+        $this->user = $user;
+    }
+
+    /**
+     * @return string
+     */
+    public function getName(): string
+    {
+        return $this->name;
+    }
+
+    /**
+     * @param string $name
+     */
+    public function setName(string $name)
+    {
+        $this->name = $name;
     }
 
     /**
@@ -559,6 +616,8 @@ class VacunaEdad implements \JsonSerializable
     {
         $array = [
             'id' => $this->getId(),
+            'user' => $this->getUser(),
+            'name' => $this->getName(),
             'age' => $this->getAge(),
             'edad' => $this->getEdad(),
             'vacuna1' => $this->getVacuna1(),

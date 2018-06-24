@@ -45,6 +45,54 @@ class APIVacunaEdadController extends Controller
     }
 
     /**
+     * POST action
+     *
+     * @param Request $request request
+     *
+     * @return JsonResponse
+     *
+     * @Route("", name="vacunaedad_cpost")
+     * @Method(Request::METHOD_POST)
+     */
+    public function postVacunaEdadAction(Request $request)
+    {
+        $body = $request->getContent(false);
+        $postData = json_decode($body, true);
+
+
+        $entityManager = $this->getDoctrine()->getManager();
+
+        // 201 - Created
+        $user = new VacunaEdad(
+            $postData['name'],
+            $postData['age'],
+            $postData['edad'],
+            $postData['vacuna1'],
+            $postData['vacuna2'],
+            $postData['vacuna3'],
+            $postData['vacuna4'],
+            $postData['vacuna5'],
+            $postData['vacuna6'],
+            $postData['isVacunated1'],
+            $postData['isVacunated2'],
+            $postData['isVacunated3'],
+            $postData['isVacunated4'],
+            $postData['isVacunated5'],
+            $postData['isVacunated6'],
+            $postData['dateVacuna1'],
+            $postData['dateVacuna2'],
+            $postData['dateVacuna3'],
+            $postData['dateVacuna4'],
+            $postData['dateVacuna5'],
+            $postData['dateVacuna6']
+        );
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return new JsonResponse($user, Response::HTTP_CREATED);
+    }
+
+    /**
      * Summary: Updates a vacunaedad
      * Notes: Updates the user identified by &#x60;userId&#x60;.
      *
