@@ -1,4 +1,10 @@
 <?php
+/**
+ * Created by PhpStorm.
+ * User: Diana
+ * Date: 26/06/2018
+ * Time: 10:11
+ */
 
 namespace AppBundle\Controller;
 
@@ -6,7 +12,6 @@ header('Access-Control-Allow-Origin: *');
 header('Access-Control-Allow-Methods: OPTIONS, POST, GET, PATCH, PUT, DELETE');
 header('Access-Control-Allow-Headers: Origin, Content-Type, X-Auth-Token, X-Requested-With, Accept, Authorization');
 
-use AppBundle\AppBundle;
 use AppBundle\Entity\Message;
 use AppBundle\Entity\Users;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -17,21 +22,19 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Doctrine\Common\Collections\Criteria;
 
-
 /**
- * Class APIUsersController
+ * Class APIAuthenticateController
  * @package Vacunas\VacunasBack\AppBundle\Controller
  *
- * @Route("/api/v1/users");
+ * @Route("/api/v1/authenticate");
  */
-
-class APIUsersController extends Controller
+class APIAuthenticateController extends Controller
 {
     /**
-     * @Route("", name="users_cget");
+     * @Route("", name="authentication_cget");
      * @Method("GET")
      */
-    public function cgetAPIUsersAction(){
+    public function cgetAPIAuthenticationAction(){
 
         $em = $this->getDoctrine()->getManager();
 
@@ -51,7 +54,7 @@ class APIUsersController extends Controller
      *
      * @return JsonResponse
      *
-     * @Route("", name="users_cpost")
+     * @Route("", name="authentication_cpost")
      * @Method(Request::METHOD_POST)
      */
     public function postUserAction(Request $request)
@@ -72,6 +75,7 @@ class APIUsersController extends Controller
 
         $entityManager = $this->getDoctrine()->getManager();
 
+
         // hay datos -> procesarlos
         /* @var \Doctrine\Common\Collections\Criteria $criteria */
         $criteria = new Criteria();
@@ -83,29 +87,18 @@ class APIUsersController extends Controller
             ->matching($criteria);
 
         if (count($user_exist)) {    // 400 - Bad Request
-
             return new JsonResponse(
-                "$user_exist",
+                "Ok",
+                Response::HTTP_OK);
+        }else{
+            return new JsonResponse(
+                "El usuario no existe!!",
                 Response::HTTP_UNAUTHORIZED
             );
         }
 
-        // 201 - Created
-        $user = new Users(
-            $postData['id'],
-            $postData['username'],
-            $postData['firstName'],
-            $postData['lastName'],
-            $postData['email'],
-            $postData['password'],
-            $postData['passwordRepeat'],
-            $postData['numChildren'],
-            $postData['childrenBirthday']
-        );
-        $entityManager->persist($user);
-        $entityManager->flush();
 
-        return new JsonResponse($user_exist, Response::HTTP_OK);
+
     }
 
     /**
@@ -118,13 +111,13 @@ class APIUsersController extends Controller
      *
      * @Route(
      *     "/{id}",
-     *     name = "options_users",
+     *     name = "options_authentication",
      *     defaults = {"id" = 1},
      *     requirements = {"id": "\d+"}
      *     )
      * @Method(Request::METHOD_OPTIONS)
      */
-    public function optionsUserAction(int $id)
+    public function optionsAuthenticationAction(int $id)
     {
         $methods = ($id)
             ? ['GET', 'PUT', 'DELETE']
@@ -160,4 +153,5 @@ class APIUsersController extends Controller
             )
             : new JsonResponse($user);
     }
+
 }
