@@ -2,22 +2,23 @@
 /**
  * Created by PhpStorm.
  * User: Diana
- * Date: 02/06/2018
- * Time: 20:27
+ * Date: 29/06/2018
+ * Time: 10:09
  */
 
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 
+
 /**
- * VacunaEdad
+ * RegistroVacunas
  *
- * @ORM\Table(name="vacunaedad")
+ * @ORM\Table(name="registrovacunas")
  * @ORM\Entity
  */
 
-class VacunaEdad implements \JsonSerializable
+class RegistroVacunas implements \JsonSerializable
 {
     /**
      * @var int
@@ -28,7 +29,7 @@ class VacunaEdad implements \JsonSerializable
     private $id;
 
     /**
-     * VacunaEdad Users
+     * RegistroVacunas Users
      *
      * @var Users
      *
@@ -65,10 +66,10 @@ class VacunaEdad implements \JsonSerializable
     private $edad;
 
     /**
-    * @var string
-    *
-    * @ORM\Column(name="vacuna1", type="string")
-    */
+     * @var string
+     *
+     * @ORM\Column(name="vacuna1", type="string")
+     */
     private $vacuna1;
 
     /**
@@ -142,10 +143,10 @@ class VacunaEdad implements \JsonSerializable
     private $isVacunated5;
 
     /**
-    * @var boolean
-    *
-    * @ORM\Column(name="isVacunated6", type="boolean")
-    */
+     * @var boolean
+     *
+     * @ORM\Column(name="isVacunated6", type="boolean")
+     */
     private $isVacunated6;
 
     /**
@@ -256,7 +257,7 @@ class VacunaEdad implements \JsonSerializable
      */
     public function getUser(): Users
     {
-        return new Users(1, '', '', '','', '', '', 1, '');
+        return new Users(1, '', '', '','', '', 1);
     }
 
     /**

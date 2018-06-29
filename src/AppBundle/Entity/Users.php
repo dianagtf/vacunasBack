@@ -62,25 +62,12 @@ class Users implements \JsonSerializable
     private $password;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="passwordRepeat", type="text", length=65535, nullable=false)
-     */
-    private $passwordRepeat;
-
-    /**
      * @var int
      *
      * @ORM\Column(name="numChildren", type="integer", nullable=false)
      */
     private $numChildren;
 
-    /**
-     * @var string
-     *
-     * @ORM\Column(name="childrenBirthday", type="text", nullable=false)
-     */
-    private $childrenBirthday;
 
     /**
      * Users constructor.
@@ -90,12 +77,10 @@ class Users implements \JsonSerializable
      * @param string $lastName
      * @param string $email
      * @param string $password
-     * @param string $passwordRepeat
      * @param int $numChildren
-     * @param string $childrenBirthday
      */
     public function __construct(int $id, string $username, string $firstName, string $lastName, string $email,
-                                string $password, string $passwordRepeat, int $numChildren, string $childrenBirthday)
+                                string $password, int $numChildren)
     {
         $this->id = $id;
         $this->username = $username;
@@ -103,9 +88,7 @@ class Users implements \JsonSerializable
         $this->lastName = $lastName;
         $this->email = $email;
         $this->password = $password;
-        $this->passwordRepeat = $passwordRepeat;
         $this->numChildren = $numChildren;
-        $this->childrenBirthday = $childrenBirthday;
     }
 
     /**
@@ -205,22 +188,6 @@ class Users implements \JsonSerializable
     }
 
     /**
-     * @return string
-     */
-    public function getPasswordRepeat(): string
-    {
-        return $this->passwordRepeat;
-    }
-
-    /**
-     * @param string $passwordRepeat
-     */
-    public function setPasswordRepeat(string $passwordRepeat)
-    {
-        $this->passwordRepeat = $passwordRepeat;
-    }
-
-    /**
      * @return int
      */
     public function getNumChildren(): int
@@ -235,23 +202,6 @@ class Users implements \JsonSerializable
     {
         $this->numChildren = $numChildren;
     }
-
-    /**
-     * @return string
-     */
-    public function getChildrenBirthday(): string
-    {
-        return $this->childrenBirthday;
-    }
-
-    /**
-     * @param string $childrenBirthday
-     */
-    public function setChildrenBirthday(string $childrenBirthday)
-    {
-        $this->childrenBirthday = $childrenBirthday;
-    }
-
 
     /**
      * Specify data which should be serialized to JSON
@@ -269,9 +219,7 @@ class Users implements \JsonSerializable
             'lastName' => $this->getLastName(),
             'email' => $this->getEmail(),
             'password' => $this->getPassword(),
-            'passwordRepeat' => $this->getPasswordRepeat(),
-            'numChildren' => $this->getNumChildren(),
-            'childrenBirthday' => $this->getChildrenBirthday()
+            'numChildren' => $this->getNumChildren()
         ];
         return $array;
     }

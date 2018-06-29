@@ -98,9 +98,7 @@ class APIUsersController extends Controller
             $postData['lastName'],
             $postData['email'],
             $postData['password'],
-            $postData['passwordRepeat'],
-            $postData['numChildren'],
-            $postData['childrenBirthday']
+            $postData['numChildren']
         );
         $entityManager->persist($user);
         $entityManager->flush();
